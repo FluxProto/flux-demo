@@ -22,7 +22,15 @@
       Few tools are truly cross-species. Flux is one.
     </p>
     <a href="https://ko-fi.com/fluxprotocol" class="donate-button" target="_blank">💙 Support Flux</a><br><br>
-    <a href="fes-demo/index.html" class="launch-button">🚀 Launch the Flux Emotion Map</a>
+    <button onclick="toggleTest()">🚀 Launch the Flux Emotion Map</button>
+<!-- Hidden Flux Emotion Test Panel -->
+<div id="flux-test" class="test-panel hidden">
+  <h2>Flux Emotion Test</h2>
+  <input type="text" placeholder="Enter your Flux string..." id="flux-input">
+  <button onclick="submitFlux()">Analyze</button>
+  <div id="flux-result"></div>
+</div>
+
   </div>
 
   <script src="script.js"></script>
