@@ -27,7 +27,9 @@
 <div id="flux-test" class="test-panel hidden">
   <h2>Flux Emotion Test</h2>
   <input type="text" placeholder="Enter your Flux string..." id="flux-input">
-  <button onclick="submitFlux()">Analyze</button>
+  <button onclick="submitFlux(); generateFluxGraph()">Analyze</button>
+<canvas id="flux-graph" width="500" height="400"></canvas>
+
   <div id="flux-result"></div>
 </div>
 
