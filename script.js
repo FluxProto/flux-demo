@@ -1,20 +1,33 @@
+const typewriterElement = document.getElementById("typewriter");
 
-const texts = ["Flux maps emotion to motion.", "Built for humans and AIs.", "Speak the unspeakable."];
-let count = 0;
-let index = 0;
-let currentText = '';
-let letter = '';
-(function type(){
-    if (count === texts.length) count = 0;
-    currentText = texts[count];
-    letter = currentText.slice(0, ++index);
+const messages = [
+  "Flux is not a product.",
+  "Flux is not a language.",
+  "Flux is a protocol."
+];
 
-    document.getElementById('typewriter').textContent = letter;
-    if(letter.length === currentText.length){
-        count++;
-        index = 0;
-        setTimeout(type, 2000);
-    } else {
-        setTimeout(type, 100);
+let messageIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+  const currentMessage = messages[messageIndex];
+  const currentText = currentMessage.substring(0, charIndex);
+  typewriterElement.textContent = currentText;
+
+  if (!isDeleting && charIndex < currentMessage.length) {
+    charIndex++;
+    setTimeout(type, 60);
+  } else if (isDeleting && charIndex > 0) {
+    charIndex--;
+    setTimeout(type, 30);
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) {
+      messageIndex = (messageIndex + 1) % messages.length;
     }
-}());
+    setTimeout(type, 1000);
+  }
+}
+
+type();
