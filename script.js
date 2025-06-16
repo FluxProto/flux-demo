@@ -44,6 +44,31 @@ function submitFlux() {
     result.innerHTML = "⚠️ Please enter a Flux sequence.";
     return;
   }
+  // Real Flux interpretation logic
+let interpretation = "";
+
+switch (input) {
+  case "+v":
+    interpretation = "↗ Ovren uplift (outward hope/expansion)";
+    break;
+  case "-v":
+    interpretation = "↘ Ovren collapse (despair or withdrawal)";
+    break;
+  case "+^":
+    interpretation = "↑ Avren clarity (focused insight)";
+    break;
+  case "-^":
+    interpretation = "↓ Avren confusion (fragmentation or regret)";
+    break;
+  case "†°=":
+    interpretation = "☠ Moral pain with judgment (Violence is a responsibility)";
+    break;
+  default:
+    interpretation = "❓ Unrecognized Flux pattern";
+}
+
+result.innerHTML = `🧠 Interpreting: <code>${input}</code><br><strong>${interpretation}</strong>`;
+
 
   // Temporary placeholder logic
   result.innerHTML = `🧠 Interpreting: <code>${input}</code><br><br>📊 Emotional path generated.`;
