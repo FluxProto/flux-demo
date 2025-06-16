@@ -118,3 +118,42 @@ body {
     max-width: 180px;
   }
 }
+.test-panel {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-align: center;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.test-panel input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 10px;
+  width: 60%;
+  font-size: 1em;
+}
+
+.test-panel button {
+  padding: 10px 20px;
+  background-color: #00ffc3;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.test-panel button:hover {
+  background-color: #00cc99;
+}
+
+.hidden {
+  display: none;
+}
+
