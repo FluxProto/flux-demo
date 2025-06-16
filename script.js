@@ -31,3 +31,21 @@ function type() {
 }
 
 type();
+function toggleTest() {
+  const testPanel = document.getElementById("flux-test");
+  testPanel.classList.toggle("hidden");
+}
+
+function submitFlux() {
+  const input = document.getElementById("flux-input").value.trim();
+  const result = document.getElementById("flux-result");
+
+  if (input === "") {
+    result.innerHTML = "⚠️ Please enter a Flux sequence.";
+    return;
+  }
+
+  // Temporary placeholder logic
+  result.innerHTML = `🧠 Interpreting: <code>${input}</code><br><br>📊 Emotional path generated.`;
+}
+
