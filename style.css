@@ -5,7 +5,7 @@ body {
   font-family: "Courier New", monospace;
   background: linear-gradient(to bottom right, #000010, #0a0a0a);
   color: #ffffff;
-  height: 100vh;
+  height: auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
