@@ -73,4 +73,45 @@ result.innerHTML = `🧠 Interpreting: <code>${input}</code><br><strong>${interp
   // Temporary placeholder logic
   result.innerHTML = `🧠 Interpreting: <code>${input}</code><br><br>📊 Emotional path generated.`;
 }
+function generateFluxGraph() {
+  const canvas = document.getElementById("flux-graph");
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const fluxSequence = document.getElementById("flux-input").value.split("");
+
+  // Mock axis values (Time, Entropy, Recursion) for demo purposes
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  const points = [];
+
+  fluxSequence.forEach((symbol, i) => {
+    x += 1;
+    y += (symbol === "+" || symbol === "^" || symbol === "s") ? 0.5 : -0.3;
+    z += (symbol === "." || symbol === "§") ? 0.5 : -0.1;
+
+    points.push({ x: x * 30, y: 200 - y * 50, label: symbol });
+  });
+
+  // Draw path
+  ctx.beginPath();
+  points.forEach((pt, i) => {
+    if (i === 0) {
+      ctx.moveTo(pt.x, pt.y);
+    } else {
+      ctx.lineTo(pt.x, pt.y);
+    }
+  });
+  ctx.strokeStyle = "#ffaa33";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Draw labels
+  points.forEach(pt => {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText(pt.label, pt.x + 4, pt.y - 4);
+  });
+}
 
