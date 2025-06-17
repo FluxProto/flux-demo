@@ -156,4 +156,11 @@ body {
 .hidden {
   display: none;
 }
+#flux-graph {
+  margin-top: 20px;
+  background-color: #111;
+  border: 1px solid #555;
+  display: block;
+}
+
 
