@@ -31,7 +31,57 @@ function type() {
 }
 
 type();
-generateFluxGraph();
+function generateFluxGraph() {
+    const input = document.getElementById("flux-input").value.trim();
+    if (!input) return;
+
+    const fluxSymbols = input.split("");
+
+    const x = [];
+    const y = [];
+    const z = [];
+
+    let entropy = 0;
+    let recursion = 0;
+
+    fluxSymbols.forEach((symbol, i) => {
+        x.push(i);
+        entropy += symbol === "c" ? 1 : symbol === "+" ? -1 : 0;
+        y.push(entropy);
+        recursion += symbol === "§" ? 1 : symbol === "⊘" ? -1 : 0;
+        z.push(recursion);
+    });
+
+    const trace = {
+        x: x,
+        y: y,
+        z: z,
+        mode: "lines+markers+text",
+        type: "scatter3d",
+        text: fluxSymbols,
+        line: {
+            width: 6,
+            color: '#ff9900'
+        },
+        marker: {
+            size: 5,
+            color: '#ff9900'
+        }
+    };
+
+    const layout = {
+        title: "Flux Emotional Map",
+        scene: {
+            xaxis: { title: "Time / Sequence" },
+            yaxis: { title: "Emotional Entropy" },
+            zaxis: { title: "Recursion Depth" }
+        },
+        margin: { l: 0, r: 0, b: 0, t: 40 }
+    };
+
+    Plotly.newPlot("flux-3d-graph", [trace], layout);
+}
+
 function toggleTest() {
   const testPanel = document.getElementById("flux-test");
   testPanel.classList.toggle("hidden");
