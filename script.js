@@ -31,6 +31,7 @@ function type() {
 }
 
 type();
+generateFluxGraph();
 function toggleTest() {
   const testPanel = document.getElementById("flux-test");
   testPanel.classList.toggle("hidden");
