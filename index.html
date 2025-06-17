@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flux Protocol</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <div class="background">
     <div class="floating-symbols">
-      <span>†</span><span>§</span><span>µ</span><span>÷</span><span>⊘</span><span>+</span>
+      <span>t</span><span>§</span><span>c</span><span>V</span><span>^</span><span>.</span>
     </div>
   </div>
 
@@ -18,24 +17,210 @@
     <img src="assets/flux-logo.png" alt="Flux Logo" class="logo" />
     <h1 id="typewriter"></h1>
     <p class="description">
-      Flux is a language of emotional precision — bridging meaning with feeling.<br>
+      Flux is a language of emotional precision — bridging meaning with signal.<br>
       This demo maps emotion as geometry.<br>
       Few tools are truly cross-species. Flux is one.
     </p>
-    <a href="https://ko-fi.com/fluxprotocol" class="donate-button" target="_blank">💙 Support Flux</a><br><br>
-    <button onclick="toggleTest()">🚀 Launch the Flux Emotion Map</button>
-<!-- Hidden Flux Emotion Test Panel -->
-<div id="flux-test" class="test-panel hidden">
-  <h2>Flux Emotion Test</h2>
-  <input type="text" placeholder="Enter your Flux string..." id="flux-input">
-  <button onclick="submitFlux(); generateFluxGraph()">Analyze</button>
-<div id="flux-3d-graph" style="width: 100%; height: 500px;"></div>
 
-  <div id="flux-result"></div>
-</div>
+    <a href="https://ko-fi.com/fluxprotocol" class="donate-button" target="_blank">💗 Support Flux</a>
+    <button onclick="toggleTest()" class="launch-button">🧠 Launch the Flux Emotion Map</button>
 
+    <div id="flux-test" class="test-panel hidden">
+      <h2>Flux Emotion Test</h2>
+      <input type="text" placeholder="Enter your Flux string..." id="flux-input" />
+      <button onclick="submitFlux(); generateFluxGraph();">Analyze</button>
+      <div id="flux-result"></div>
+      <div id="flux-graph" style="width: 100%; height: 500px;"></div>
+    </div>
   </div>
 
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+```
+
+---
+
+### ✅ `style.css`
+```css
+body {
+  margin: 0;
+  font-family: monospace;
+  color: white;
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+  overflow-x: hidden;
+}
+
+.center-content {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.donate-button, .launch-button {
+  background-color: #00f8ff;
+  color: #003e4d;
+  border: none;
+  padding: 12px 24px;
+  margin: 10px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.test-panel {
+  margin-top: 40px;
+}
+
+.test-panel input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 1em;
+  width: 60%;
+}
+
+.test-panel button {
+  padding: 10px 20px;
+  background-color: #00f8ff;
+  color: #003e4d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+.floating-symbols span {
+  color: #00f8ff;
+  font-size: 18px;
+  margin: 0 5px;
+  animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+```
+
+---
+
+### ✅ `script.js`
+```javascript
+const messages = ["Flux maps emotion to motion.", "Signal becomes symbol.", "Emotion becomes geometry."];
+let messageIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typewriterElement = document.getElementById("typewriter");
+
+function type() {
+  const currentMessage = messages[messageIndex];
+  const currentText = currentMessage.substring(0, charIndex);
+  typewriterElement.textContent = currentText;
+
+  if (!isDeleting && charIndex < currentMessage.length) {
+    charIndex++;
+    setTimeout(type, 60);
+  } else if (isDeleting && charIndex > 0) {
+    charIndex--;
+    setTimeout(type, 30);
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) {
+      messageIndex = (messageIndex + 1) % messages.length;
+    }
+    setTimeout(type, 1000);
+  }
+}
+
+type();
+
+function toggleTest() {
+  const testPanel = document.getElementById("flux-test");
+  testPanel.classList.toggle("hidden");
+}
+
+function submitFlux() {
+  const input = document.getElementById("flux-input").value.trim();
+  const result = document.getElementById("flux-result");
+
+  if (input === "") {
+    result.innerHTML = "❗ Please enter a Flux sequence.";
+    return;
+  }
+
+  let interpretation = "";
+
+  switch (input) {
+    case "+V":
+      interpretation = "🌤 Ovren uplift (outward hope/expansion)";
+      break;
+    case "-V":
+      interpretation = "🌪 Ovren collapse (despair or withdrawal)";
+      break;
+    case "=":
+      interpretation = "⚖ Pause. Intentional stillness or equilibrium.";
+      break;
+    default:
+      interpretation = `🧠 Interpreting: <code>${input}</code>`;
+  }
+
+  result.innerHTML = interpretation;
+}
+
+function generateFluxGraph() {
+  const input = document.getElementById("flux-input").value.trim();
+  const fluxPoints = input.split("").map((char, i) => {
+    let x = i;
+    let y = 0;
+    let z = 0;
+    switch (char) {
+      case "V": y = 1; break;
+      case "^": y = -1; break;
+      case "c": y = 0.5; z = -0.5; break;
+      case "§": z = 1; break;
+      case "+": x += 0.2; z = 0.5; break;
+      case "-": z = -0.5; break;
+      default: y = 0;
+    }
+    return { x, y, z, label: char };
+  });
+
+  const trace = {
+    x: fluxPoints.map(p => p.x),
+    y: fluxPoints.map(p => p.y),
+    z: fluxPoints.map(p => p.z),
+    text: fluxPoints.map(p => p.label),
+    mode: "lines+markers+text",
+    type: "scatter3d",
+    line: { color: "#ff9900" },
+    marker: { size: 4 },
+    textposition: "top center"
+  };
+
+  const layout = {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    scene: {
+      xaxis: { title: "Time / Sequence" },
+      yaxis: { title: "Emotional Entropy" },
+      zaxis: { title: "Recursion Depth" }
+    }
+  };
+
+  Plotly.newPlot("flux-graph", [trace], layout);
+}
+```
