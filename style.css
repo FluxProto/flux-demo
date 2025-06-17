@@ -1,166 +1,136 @@
-/* Background and layout */
 body {
   margin: 0;
-  padding: 0;
-  font-family: "Courier New", monospace;
-  background: linear-gradient(to bottom right, #000010, #0a0a0a);
-  color: #ffffff;
-  height: auto;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-/* Floating symbols */
-.floating-symbols span {
-  position: absolute;
-  font-size: 24px;
-  opacity: 0.1;
-  animation: float 12s infinite linear;
-  pointer-events: none;
-  user-select: none;
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  z-index: -1;
+  overflow: hidden;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translateY(-200vh) rotate(360deg);
-    opacity: 0.1;
-  }
-}
-
-/* Generate multiple random floating symbols */
 .floating-symbols {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .floating-symbols span {
-  top: calc(100% * var(--i));
-  left: calc(100% * var(--j));
-  animation-duration: calc(10s + 10s * var(--k));
+  position: absolute;
+  font-size: 2rem;
+  animation: float 10s infinite ease-in-out;
+  opacity: 0.3;
+  color: #aaa;
 }
 
-/* Centered logo and text */
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-50px) translateX(50px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
 .center-content {
-  position: relative;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
   text-align: center;
-  padding: 2rem;
 }
 
 .logo {
-  max-width: 240px;
-  width: 80%;
-  height: auto;
-  margin-bottom: 1.5rem;
+  width: 180px;
+  max-width: 80%;
+  margin-bottom: 20px;
 }
 
-/* Typewriter headline */
 #typewriter {
-  font-size: 1.6rem;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 0.15em solid #00ffff;
-  width: fit-content;
-  margin: 0 auto 1rem auto;
-}
-
-/* Description text */
-.description {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-/* Buttons */
-.donate-button, .launch-button {
-  background-color: #00ffff;
-  color: #000;
+  font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: none;
-  padding: 0.7rem 1.4rem;
-  margin: 0.5rem;
-  border-radius: 8px;
+  margin: 10px 0 20px;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.donate-button {
   display: inline-block;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  background-color: #ff5ca2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.donate-button:hover, .launch-button:hover {
-  transform: scale(1.05);
-  background-color: #00cccc;
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  background-color: #222;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* Mobile tweaks */
-@media screen and (max-width: 768px) {
-  #typewriter {
-    font-size: 1.2rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
-
-  .logo {
-    max-width: 180px;
-  }
+button:hover {
+  background-color: #333;
 }
+
 .test-panel {
   margin-top: 30px;
+  max-width: 600px;
+  width: 90%;
+  background: #111;
   padding: 20px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  text-align: center;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.test-panel input[type="text"] {
+.test-panel input {
+  width: 100%;
   padding: 10px;
-  border: none;
-  border-radius: 6px;
-  margin-right: 10px;
-  width: 60%;
-  font-size: 1em;
-}
-
-.test-panel button {
-  padding: 10px 20px;
-  background-color: #00ffc3;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.test-panel button:hover {
-  background-color: #00cc99;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
 }
 
 .hidden {
   display: none;
 }
-#flux-graph {
-  margin-top: 20px;
-  background-color: #111;
-  border: 1px solid #555;
-  display: block;
+
+@media (max-width: 600px) {
+  .logo {
+    width: 140px;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  #typewriter {
+    font-size: 1.2rem;
+  }
 }
-
-
