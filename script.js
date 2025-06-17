@@ -114,4 +114,56 @@ function generateFluxGraph() {
     ctx.fillText(pt.label, pt.x + 4, pt.y - 4);
   });
 }
+function generateFluxGraph() {
+  const fluxString = document.getElementById('flux-input').value.trim();
+  const symbolMap = {
+    'o': [0, 0, 0],
+    'v': [1, 1, 0.5],
+    'c': [2, -1, 0.2],
+    '+': [3, 0, 1],
+    '^': [4, 1, 1.5],
+    's': [5, 0.5, 1.2],
+    '.': [6, -0.5, 0.6]
+  };
+
+  const x = [], y = [], z = [], labels = [];
+
+  for (let i = 0; i < fluxString.length; i++) {
+    const symbol = fluxString[i];
+    if (symbolMap[symbol]) {
+      const [xi, yi, zi] = symbolMap[symbol];
+      x.push(xi);
+      y.push(yi);
+      z.push(zi);
+      labels.push(symbol);
+    }
+  }
+
+  const trace = {
+    x: x,
+    y: y,
+    z: z,
+    mode: 'lines+text',
+    type: 'scatter3d',
+    text: labels,
+    textposition: 'top center',
+    line: {
+      width: 4,
+      color: 'orange'
+    },
+    marker: {
+      size: 6,
+      color: 'orange'
+    }
+  };
+
+  Plotly.newPlot('flux-3d-graph', [trace], {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    scene: {
+      xaxis: { title: 'Time / Sequence' },
+      yaxis: { title: 'Emotional Entropy' },
+      zaxis: { title: 'Recursion Depth' }
+    }
+  });
+}
 
